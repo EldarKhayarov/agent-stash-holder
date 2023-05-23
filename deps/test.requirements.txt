@@ -1,0 +1,6 @@
+-r common.requirements.txt
+
+# Зависимости для тестирования.
+httpx~=0.24.0
+pytest~=7.3.1
+aiofiles~=23.1.0

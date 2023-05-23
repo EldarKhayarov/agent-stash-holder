@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  stash_holder:
+    build:
+      context: .
+      dockerfile: deployment/stash_holder/development.Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - "./app:/app"
+    env_file:
+      - env_files/stash_holder/development.env
+      - env_files/postgres/development.env
+    networks:
+      - stash-holder-net
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    env_file:
+      - env_files/postgres/development.env
+    networks:
+      - stash-holder-net
+    volumes:
+      - db-data:/etc/data
+
+
+networks:
+  stash-holder-net: {}
+
+
+volumes:
+  db-data:
