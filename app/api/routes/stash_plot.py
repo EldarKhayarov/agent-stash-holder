@@ -13,8 +13,8 @@ from app.services.plot_generator import generate_time_scatter_plot
 router = APIRouter()
 
 
-@router.get("")
-async def stash_plot(
+@router.api_route("", methods=["GET", "POST"])
+async def generate_stash_plot(
     period: int,
     agent_ids: list[str] = get_agent_id_query(),
     stash_repo: StashRequestRepository = Depends(
@@ -23,6 +23,7 @@ async def stash_plot(
 ):
     """
     Генерация графика запросов во времени.
+
     :param period:
     :param agent_ids:
     :param stash_repo:
