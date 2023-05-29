@@ -1,0 +1,19 @@
+name: Docker testing and deploying
+
+on: [workflow_dispatch]
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Testing the service
+      run: docker compose -f test.compose.yaml up --exit-code-from stash_holder__test --abort-on-container-exit
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploying the service
+      run: docker compose up
